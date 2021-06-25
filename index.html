@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="styles/styles.css">
+    </head>
+    <body>
+    <script>
+        //this function will call in the CountDownTimer function twice. 
+        CountDownTimer('07/26/2021 02:1 PM', 'countdown');
+        CountDownTimer('12/25/2021 08:1 AM', 'newcountdown');
+        // create the function, and pass 2 arguements. 
+        function CountDownTimer(dt, id)
+        {
+            var end = new Date(dt);
+            // Get the Current date, stick it in a variable called end.
+            var _second = 1000;
+            // 60 seconds in a min;
+            var _minute = _second * 60;
+            // 60mins in an hour;
+            var _hour = _minute * 60;
+            // 24 hours in a day;
+            var _day = _hour * 24;
+            var timer;
+    
+            function showRemaining() {
+                // get the current date;
+                var now = new Date();
+                // time remaining = end date - current date;
+                var distance = end - now;
+                // if timeRemaining is < 0;
+                if (distance < 0) {
+                    // clear the timer;
+                    clearInterval(timer);
+                    // Set a warning;
+                    document.getElementById(id).innerHTML = 'EXPIRED!';
+                    // leave current code;
+                    return;
+                }
+                // Round down the calculated timeremaining in days, hours, mins and seconds;
+                var days = Math.floor(distance / _day);
+                var hours = Math.floor((distance % _day) / _hour);
+                var minutes = Math.floor((distance % _hour) / _minute);
+                var seconds = Math.floor((distance % _minute) / _second);
+                // grabbing the html and making a string to be output;
+                document.getElementById(id).innerHTML = days + ' days ';
+                document.getElementById(id).innerHTML += hours + ' hours ';
+                document.getElementById(id).innerHTML += minutes + ' minutes ';
+                document.getElementById(id).innerHTML += seconds + ' seconds';
+            }
+            
+            timer = setInterval(showRemaining, 1000);
+        }
+    
+    </script>
+    <h1>Countdown to Exciting Date!</h1>
+    <div id="countdown"></div>
+    <h1>Countdown to Christmas Morning!</h1>
+    <div id="newcountdown"></div>
+    </body>
+</html>
